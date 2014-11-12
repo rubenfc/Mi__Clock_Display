@@ -7,27 +7,18 @@
  */
 public class numberDisplay
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class numberDisplay
+    //limite del display
+    private int display;
+    //display actual
+    private int actualDisplay;
+    
+    /*
+     * fija el valor de display y pone el valor actual del display en 0
      */
-    public numberDisplay()
+    public numberDisplay (int limitDisplay)
     {
-        // initialise instance variables
-        x = 0;
+        display = limitDisplay;
+        actualDisplay = 0;
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     * 
-     * @param  y   a sample parameter for a method
-     * @return     the sum of x and y 
-     */
-    public int sampleMethod(int y)
-    {
-        // put your code here
-        return x + y;
-    }
+    
 }
