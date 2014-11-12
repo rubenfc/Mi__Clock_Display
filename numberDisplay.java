@@ -8,17 +8,54 @@
 public class numberDisplay
 {
     //limite del display
-    private int display;
+    private int limite;
     //display actual
-    private int actualDisplay;
+    private int value;
+    private int incremento;
     
     /*
      * fija el valor de display y pone el valor actual del display en 0
      */
-    public numberDisplay (int limitDisplay)
+    public numberDisplay (int limite)
     {
-        display = limitDisplay;
-        actualDisplay = 0;
+        value = 0;
+        
     }
     
+    
+    public void setValue(int currentDisplay)
+    {
+        value = currentDisplay;
+    }
+    
+    public String getDisplayValue()
+    {
+        if (value > 10)
+        {
+           
+            return "0" + value;
+        }
+        else 
+        {
+            return "" + value;
+        }
+    }
+    
+    public int getValue()
+    {
+        return  value;
+    }
+    
+    public int increment()
+    {
+        if (value < limite)
+        {
+            return value = value + 1;
+        }
+        else 
+        {
+            return value = 0;
+        }
+    
+    }
 }
