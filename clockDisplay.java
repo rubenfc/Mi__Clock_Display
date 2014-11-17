@@ -8,12 +8,15 @@
 public class clockDisplay
 {
     // las horas
-    private int hours;
+    private numberDisplay hours;
     // los minutos
-    private int minutes;
+    private numberDisplay minutes;
     //hora actual
     private String horaActual;
 
+    /**
+         * fija la hora en 00:00
+         */
     public void ClockDisplay()
     {
         horaActual = "00:00"; 
@@ -34,9 +37,6 @@ public class clockDisplay
             minutes = minutoActual;
         }
 
-        /**
-         * fija la hora en 00:00
-         */
 
     }
 

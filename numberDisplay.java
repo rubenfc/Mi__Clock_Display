@@ -68,6 +68,7 @@ public class numberDisplay
             {
                 value = 0;
             }
+            return value; 
 
         }
         
