@@ -15,11 +15,11 @@ public class clockDisplay
     private String horaActual;
 
     public void ClockDisplay()
-        {
-            horaActual = "00:00"; 
-        }
-    
-     /**
+    {
+        horaActual = "00:00"; 
+    }
+
+    /**
      * fija la hora actual
      */
     public void numberDisplay(int horaActual, int minutoActual)
@@ -37,15 +37,45 @@ public class clockDisplay
         /**
          * fija la hora en 00:00
          */
-        
+
     }
-    
+
     /**
-         * fija unas horas y unos minutos dados
-         */
-        public void setTime(int newHours, int newMinutes)
+     * fija unas horas y unos minutos dados
+     */
+    public void setTime(int newHours, int newMinutes)
+    {
+        hours = newHours;
+        minutes = newMinutes;
+    }
+
+    /**
+     *5 caractere motrando la hora y min separado por dos puntos 
+     */
+    public String getTime()
+    {
+        String time = "";
+
+        if (hours < 10)
         {
-            hours = newHours;
-            minutes = newMinutes;
+            time = "0" + hours;
         }
+        else 
+        {
+            time = "" + hours;
+        }
+
+        time = time + ":";
+
+        if (minutes < 10)
+        {
+            time = time + "0" + minutes;
+        }
+
+        else
+        {
+            time = time +  minutes;
+        }
+        return time;
+    }    
 }
