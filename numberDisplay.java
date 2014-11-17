@@ -10,52 +10,72 @@ public class numberDisplay
     //limite del display
     private int limite;
     //display actual
-    private int value;
-    private int incremento;
+    private int value; 
     
-    /*
-     * fija el valor de display y pone el valor actual del display en 0
-     */
-    public numberDisplay (int limite)
-    {
-        value = 0;
-        
-    }
-    
-    
-    public void setValue(int currentDisplay)
-    {
-        value = currentDisplay;
-    }
-    
-    public String getDisplayValue()
-    {
-        if (value > 10)
+   
+        /**
+        * fija el valor de display y pone el valor actual del display en 0
+        */
+        public numberDisplay(int newlimite)
         {
-           
-            return "0" + value;
+            value = 0;
+            limite = newlimite;
         }
-        else 
+
+        /**
+         * fija el valor del atributo value a uno dando
+         */
+        public void setValue(int currentDisplay)
         {
-            return "" + value;
+            value = currentDisplay;
+        }
+
+        /**
+         * devuelve una cadena de dos caracteres 
+         * con el valor del atributo value
+         */
+
+        public String getDisplayValue()
+        {
+            String returnValue = "";
+            if (value > 10)
+            {
+
+                returnValue = "0" + value;
+            }
+            else 
+            {
+                returnValue = "" + value;
+            }
+            return returnValue;
+        }
+
+        /**
+         * devuelve el valor del value
+         */
+        public int getValue()
+        {
+            return  value;
+        }
+
+        /**
+         * incrementa en 1 el valor de value y lo hace volver a 0 si alcanza el limite
+         */
+        public int increment()
+        {
+            value = value + 1;
+            if (value == limite) 
+            {
+                value = 0;
+            }
+
+        }
+        /**
+         * fija unas horas y unos minutos dados
+         */
+        public void setTime(int newHours, int newMinutes)
+        {
+            hours = newHours;
+            minutes = newMinutes;
         }
     }
-    
-    public int getValue()
-    {
-        return  value;
-    }
-    
-    public int increment()
-    {
-        if (value < limite)
-        {
-            return value = value + 1;
-        }
-        else 
-        {
-            return value = 0;
-        }
-    
-    }
-}
