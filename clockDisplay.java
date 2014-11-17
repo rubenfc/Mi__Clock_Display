@@ -8,15 +8,15 @@
 public class clockDisplay
 {
     // las horas
-    private numberDisplay hours;
+    private int hours;
     // los minutos
-    private numberDisplay minutes;
+    private int minutes;
     //hora actual
     private String horaActual;
 
     /**
-         * fija la hora en 00:00
-         */
+     * fija la hora en 00:00
+     */
     public void ClockDisplay()
     {
         horaActual = "00:00"; 
@@ -37,9 +37,7 @@ public class clockDisplay
             minutes = minutoActual;
         }
 
-
     }
-
     /**
      * fija unas horas y unos minutos dados
      */
@@ -77,5 +75,27 @@ public class clockDisplay
             time = time +  minutes;
         }
         return time;
-    }    
+    }   
+
+    /**
+     * Hace avanzar un minuto al reloj
+     */
+
+    public void timeTick()
+    {
+        if (minutes < 59)
+        {
+            minutes = minutes + 1;
+        }
+        else 
+            minutes = 0;
+        if (hours < 23)
+        {
+            hours = hours + 1;
+        }   
+        else 
+        {
+            hours = 0;
+        }
+    }
 }
