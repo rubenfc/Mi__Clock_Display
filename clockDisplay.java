@@ -39,4 +39,13 @@ public class clockDisplay
          */
         
     }
+    
+    /**
+         * fija unas horas y unos minutos dados
+         */
+        public void setTime(int newHours, int newMinutes)
+        {
+            hours = newHours;
+            minutes = newMinutes;
+        }
 }
