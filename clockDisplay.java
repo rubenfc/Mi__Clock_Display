@@ -32,19 +32,26 @@ public class clockDisplay
         {
             hours = horaActual;
         }
-        if (horaActual < 60 && horaActual >= 0)
+        if (minutoActual < 60 && minutoActual >= 0)
         {
             minutes = minutoActual;
         }
 
     }
+
     /**
      * fija unas horas y unos minutos dados
      */
     public void setTime(int newHours, int newMinutes)
     {
-        hours = newHours;
-        minutes = newMinutes;
+        if (newHours < 24 && newHours >= 0) 
+        {
+            hours = newHours;
+        }
+        if (newMinutes < 60 && newMinutes >= 0)
+        {
+            minutes = newMinutes;
+        }
     }
 
     /**
