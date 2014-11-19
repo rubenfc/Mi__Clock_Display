@@ -5,104 +5,88 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class clockDisplay
+public class ClockDisplay
 {
-    // las horas
-    private int hours;
-    // los minutos
-    private int minutes;
-    //hora actual
-    private String horaActual;
-
+    // The hours.
+    private NumberDisplay hour;
+    // The minutes.
+    private NumberDisplay minute;
+    // The current time.
+    private String currentTime;
+    
+    
     /**
-     * fija la hora en 00:00
+     * Initialize the clock to 00:00
      */
-    public void ClockDisplay()
+    public ClockDisplay()
     {
-        horaActual = "00:00"; 
+        hour = new NumberDisplay(24);
+        minute = new NumberDisplay(60);
+        updateDisplay();
     }
-
+    
     /**
-     * fija la hora actual
+     * Initialize the clock to the given time.
      */
-    public void numberDisplay(int horaActual, int minutoActual)
-
+    public ClockDisplay(int newHour, int newMinute)
     {
-        if (horaActual < 24 && horaActual >= 0) 
-        {
-            hours = horaActual;
-        }
-        if (minutoActual < 60 && minutoActual >= 0)
-        {
-            minutes = minutoActual;
-        }
-
+       hour = new NumberDisplay(24);
+       minute = new NumberDisplay(60);
+       hour.setValue(newHour);
+       minute.setValue(newMinute);
+       
+       updateDisplay();
     }
-
+    
     /**
-     * fija unas horas y unos minutos dados
+     * Sets the clock to the given hour and minute.
      */
-    public void setTime(int newHours, int newMinutes)
+    public void setTime(int newHour, int newMinute)
     {
-        if (newHours < 24 && newHours >= 0) 
-        {
-            hours = newHours;
-        }
-        if (newMinutes < 60 && newMinutes >= 0)
-        {
-            minutes = newMinutes;
-        }
+       hour.setValue(newHour);
+       minute.setValue(newMinute);
+       updateDisplay();
     }
-
+    
     /**
-     *5 caractere motrando la hora y min separado por dos puntos 
+     * Returns the Time in 24h format.
      */
     public String getTime()
     {
-        String time = "";
-
-        if (hours < 10)
-        {
-            time = "0" + hours;
-        }
-        else 
-        {
-            time = "" + hours;
-        }
-
-        time = time + ":";
-
-        if (minutes < 10)
-        {
-            time = time + "0" + minutes;
-        }
-
-        else
-        {
-            time = time +  minutes;
-        }
-        return time;
-    }   
-
+        return currentTime;
+    }
+    
     /**
-     * Hace avanzar un minuto al reloj
+     * Sets the time 1 minute forward.
      */
-
     public void timeTick()
     {
-        if (minutes < 59)
+        minute.increment();
+        if (minute.getDisplayValue().equals("00"))
         {
-            minutes = minutes + 1;
+            hour.increment();
+        }
+        updateDisplay();
+    } 
+    
+    /**
+     * Updates the current time.
+     */
+    private void updateDisplay()
+    {   
+        int newHora = hour.getValue();
+        int horaTarde = hour.getValue() -12;
+        if (newHora < 12)
+        {
+        currentTime = hour.getDisplayValue() + ":" +  minute.getDisplayValue() + " a.m";
+        }
+        else if (newHora == 12)
+        {
+            currentTime = hour.getDisplayValue() + ":" +  minute.getDisplayValue() + " p.m";
         }
         else 
-            minutes = 0;
-        if (hours < 23)
         {
-            hours = hours + 1;
-        }   
-        else 
-        {
-            hours = 0;
+        currentTime = horaTarde + ":" +  minute.getDisplayValue() + " p.m";
         }
-    }
+    }     
 }
