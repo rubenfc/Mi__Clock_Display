@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class clockDisplay here.
  * 
@@ -7,86 +6,175 @@
  */
 public class ClockDisplay
 {
-    // The hours.
+    //horas
     private NumberDisplay hour;
-    // The minutes.
+    //minutos
     private NumberDisplay minute;
-    // The current time.
-    private String currentTime;
-    
-    
+    //dia
+    private NumberDisplay dia;
+    //mes
+    private NumberDisplay mes;
+    //año
+    private NumberDisplay anio;
+    //hora y fecha
+    private String courentValue;
+
     /**
-     * Initialize the clock to 00:00
+     * da la hora a 00:00 y la fecha 01/01/01
      */
     public ClockDisplay()
     {
-        hour = new NumberDisplay(24);
+        hour   = new NumberDisplay(24);
         minute = new NumberDisplay(60);
+        dia    = new NumberDisplay(31);
+        mes  = new NumberDisplay(13);
+        anio   = new NumberDisplay(100);
+        dia.setValue(1);
+        mes.setValue(1);
+        anio.setValue(0);
+        updateDisplay();       
+    }
+
+    /**
+     * introducir la hora
+     */
+    public ClockDisplay(int newHour, int newMinute, int newDay, int newMonth, int newYear)
+    {
+        hour   = new NumberDisplay(24);
+        minute = new NumberDisplay(60);
+        dia    = new NumberDisplay(31);
+        mes  = new NumberDisplay(13);
+        anio   = new NumberDisplay(100);
+        hour.setValue(newHour);
+        minute.setValue(newMinute);
+        dia.setValue(newDay);
+        mes.setValue(newMonth);
+        anio.setValue(newYear);       
+        updateDisplay();
+    }
+
+    /**
+     * fija la hora y fecha 
+     */
+
+    public void setTime(int newHour, int newMinute, int newDia, int newMes, int newAnio)
+    {
+        hour.setValue(newHour);
+        minute.setValue(newMinute);
+        dia.setValue(newDia);
+        mes.setValue(newMes);
+        anio.setValue(newAnio);
         updateDisplay();
     }
     
-    /**
-     * Initialize the clock to the given time.
-     */
-    public ClockDisplay(int newHour, int newMinute)
+   
+    public void setDate(int newDia, int newMes, int newAnio)
     {
-       hour = new NumberDisplay(24);
-       minute = new NumberDisplay(60);
-       hour.setValue(newHour);
-       minute.setValue(newMinute);
-       
-       updateDisplay();
+        dia.setValue(newDia);
+        mes.setValue(newMes);
+        anio.setValue(newAnio);      
+        updateDisplay();
     }
     
-    /**
-     * Sets the clock to the given hour and minute.
+     /**
+     * fija la hora en valores nuevos
      */
-    public void setTime(int newHour, int newMinute)
+
+    public void setHour(int newHour, int newMinute)
     {
-       hour.setValue(newHour);
-       minute.setValue(newMinute);
-       updateDisplay();
+        hour.setValue(newHour);
+        minute.setValue(newMinute);      
+        updateDisplay();
     }
     
+    
+    
     /**
-     * Returns the Time in 24h format.
+     * devuelve en cadena la hora
      */
     public String getTime()
     {
-        return currentTime;
+        return courentValue;
     }
-    
+
     /**
-     * Sets the time 1 minute forward.
+     * incrementa un minuto 
      */
+
     public void timeTick()
     {
         minute.increment();
-        if (minute.getDisplayValue().equals("00"))
+        
+        if (minute.getValue() == 0)
         {
             hour.increment();
+            
+            if (hour.getValue() == 0)
+            {
+               dia.increment();
+            }
+           
+            if (dia.getValue() == 0)
+            {   
+                dia.setValue(1);
+                mes.increment();
+            
+                if (mes.getValue() == 0)
+                {
+                    mes.setValue(1);
+                    anio.increment();
+                }
+            }
         }
         updateDisplay();
-    } 
-    
+    }
+      
     /**
-     * Updates the current time.
+     * cadena hora y fecha
      */
     private void updateDisplay()
-    {   
-        int newHora = hour.getValue();
-        int horaTarde = hour.getValue() -12;
-        if (newHora < 12)
-        {
-        currentTime = hour.getDisplayValue() + ":" +  minute.getDisplayValue() + " a.m";
+    {
+        int valueHour = hour.getValue();
+        String newMinute = minute.getDisplayValue();
+        String newHour; 
+        String amPm;
+        
+            
+       
+        if(valueHour < 12)
+        {   
+            String manana = "am";
+           
+            if (valueHour == 0)
+            {
+                newHour = "12";
+            }
+            else
+            {
+                newHour = hour.getDisplayValue();
+                courentValue = newHour + ":" + newMinute + " " + manana + " " + dia.getDisplayValue() + "/" + mes.getDisplayValue() + "/" + anio.getDisplayValue();
+            }
+            
         }
-        else if (newHora == 12)
+        else
         {
-            currentTime = hour.getDisplayValue() + ":" +  minute.getDisplayValue() + " p.m";
+            String tarde = "pm";
+            
+            if (valueHour == 12)
+            {
+                newHour = "12";
+            }
+            else if((valueHour - 12) < 10 )
+            {
+                newHour = "0" + (valueHour - 12);
+            }
+            else
+            {
+                newHour = "" + (valueHour - 12);
+                courentValue = newHour + ":" + newMinute + " " + tarde + " " + dia.getDisplayValue() + "/" + mes.getDisplayValue() + "/" + anio.getDisplayValue();
+            }
+        
         }
-        else 
-        {
-        currentTime = horaTarde + ":" +  minute.getDisplayValue() + " p.m";
-        }
-    }     
+    }
+
 }
